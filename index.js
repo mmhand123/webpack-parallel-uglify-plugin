@@ -31,6 +31,11 @@ FasterUglifyPlugin.prototype.apply = function apply(compiler) {
       });
     });
   });
+  if (this.options.cacheDir) {
+    compiler.plugin('done', stats => {
+      uglifier.cleanUpCache(this.options);
+    });
+  }
 };
 
 module.exports = FasterUglifyPlugin;
